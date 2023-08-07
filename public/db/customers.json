@@ -1,0 +1,68 @@
+[
+    {
+        "id": 1,
+        "first_name": "John",
+        "last_name": "Doe",
+        "transactions": [
+            {
+                "id": 1,
+                "total": 57.0,
+                "date": "4/23/2023"
+            },
+            {
+                "id": 2,
+                "total": 120.0,
+                "date": "7/1/2023"
+            },
+            {
+                "id": 3,
+                "total": 45.0,
+                "date": "7/2/2023"
+            },
+            {
+                "id": 4,
+                "total": 90.0,
+                "date": "7/3/2023"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "first_name": "Jane",
+        "last_name": "Doe",
+        "transactions": [
+            {
+                "id": 5,
+                "total": 95.0,
+                "date": "7/3/2023"
+            },
+            {
+                "id": 6,
+                "total": 113.0,
+                "date": "7/4/2023"
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "first_name": "Jimmy",
+        "last_name": "Doe",
+        "transactions": [
+            {
+                "id": 7,
+                "total": 85.0,
+                "date": "7/10/2023"
+            },
+            {
+                "id": 8,
+                "total": 48.0,
+                "date": "7/12/2023"
+            },
+            {
+                "id": 9,
+                "total": 134.0,
+                "date": "8/1/2023"
+            }
+        ]
+    }
+]
