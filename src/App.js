@@ -1,36 +1,36 @@
-import { useEffect, useState } from 'react'
-import axios from 'axios'
+import { useEffect, useState } from "react"
+import axios from "axios"
+import { Modal } from "react-bootstrap"
+import MonthlyTable from "./MonthlyTable"
 
 const App = () => {
     const [customers, setCustomers] = useState([])
+    const [showModal, setShowModal] = useState(false)
+    const [modalData, setModalData] = useState([])
+
+    const currentMonth = new Date().getMonth()
+    const lastMonth = currentMonth - 1
+    const twoMonthsAgo = currentMonth - 2
 
     useEffect(() => {
-        axios.get('/db/customers.json').then((res) => {
+        axios.get("/db/customers.json").then((res) => {
             setCustomers(res.data)
         })
     }, [])
 
-    const calculateRewardPoints = (transactions) => {
+    const calculateTotalRewardPoints = (transactions) => {
         let total = 0
 
         transactions.map((transaction) => {
-            let today = new Date()
-            let threeMonthsAgo = today.setMonth(today.getMonth() - 3)
-            let transactionDate = new Date(transaction.date).getTime()
-
-            if (transactionDate >= threeMonthsAgo && transaction.total > 50) {
-                console.log('date: ', new Date(transactionDate))
-                if (transaction.total > 100) {
-                    total += 50
-                    let totalOverOneHundred = Math.floor(
-                        transaction.total % 100
-                    )
-                    // putting '* 2' at the end here because any transaction over 100 is 2 points
-                    total += totalOverOneHundred * 2
-                } else {
-                    let totalUnderOneHundred = transaction.total % 50
-                    total += Math.floor(totalUnderOneHundred)
-                }
+            if (transaction.total > 100) {
+                // automatically adding 50 since the we know the transaction was over
+                total += 50
+                let totalOverOneHundred = Math.floor(transaction.total - 100)
+                // putting '* 2' at the end here because any transaction over 100 is 2 points
+                total += totalOverOneHundred * 2
+            } else if (transaction.total > 50 && transaction.total <= 100) {
+                let totalUnderOneHundred = transaction.total - 50
+                total += Math.floor(totalUnderOneHundred)
             }
         })
 
@@ -50,28 +50,56 @@ const App = () => {
 
         return customers.map((customer) => {
             return (
-                <tr key={`${customer.id}-${customer.last_name}`}>
+                <tr
+                    key={`${customer.id}-${customer.last_name}`}
+                    className="points-modal"
+                    onClick={() => {
+                        setModalData(customer.transactions)
+                        setShowModal(true)
+                        console.log(modalData)
+                    }}
+                >
                     <th scope="row">{customer.id}</th>
                     <td>{customer.first_name}</td>
                     <td>{customer.last_name}</td>
-                    <td>{calculateRewardPoints(customer.transactions)}</td>
+                    <td>
+                        <span>
+                            {calculateTotalRewardPoints(customer.transactions)}
+                            {" points"}
+                        </span>
+                    </td>
                 </tr>
             )
         })
     }
 
     return (
-        <table className="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">Customer ID</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Reward Points (Last 3 Months)</th>
-                </tr>
-            </thead>
-            <tbody>{showCustomers()}</tbody>
-        </table>
+        <>
+            <table
+                className="table table-hover"
+                style={{ width: 1100, marginLeft: "auto", marginRight: "auto" }}
+            >
+                <thead>
+                    <tr>
+                        <th scope="col">Customer ID</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Reward Points (Last 3 Months)</th>
+                    </tr>
+                </thead>
+                <tbody>{showCustomers()}</tbody>
+            </table>
+
+            <Modal
+                show={showModal}
+                onHide={() => setShowModal(false)}
+                size="lg"
+            >
+                <MonthlyTable transactions={modalData} month={currentMonth} />
+                <MonthlyTable transactions={modalData} month={lastMonth} />
+                <MonthlyTable transactions={modalData} month={twoMonthsAgo} />
+            </Modal>
+        </>
     )
 }
 
