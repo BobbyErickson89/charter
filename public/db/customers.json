@@ -1,0 +1,95 @@
+[
+    {
+        "id": 1,
+        "first_name": "Jimi",
+        "last_name": "Hendrix",
+        "transactions": [
+            {
+                "id": 1,
+                "total": 57.0,
+                "date": "6/23/2023"
+            },
+            {
+                "id": 2,
+                "total": 120.0,
+                "date": "6/24/2023"
+            },
+            {
+                "id": 3,
+                "total": 45.0,
+                "date": "7/3/2023"
+            },
+            {
+                "id": 4,
+                "total": 90.0,
+                "date": "7/3/2023"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "first_name": "Kurt",
+        "last_name": "Cobain",
+        "transactions": [
+            {
+                "id": 5,
+                "total": 95.0,
+                "date": "7/3/2023"
+            },
+            {
+                "id": 6,
+                "total": 113.0,
+                "date": "7/4/2023"
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "first_name": "Robert",
+        "last_name": "Plant",
+        "transactions": [
+            {
+                "id": 7,
+                "total": 85.0,
+                "date": "7/10/2023"
+            },
+            {
+                "id": 8,
+                "total": 48.0,
+                "date": "7/12/2023"
+            },
+            {
+                "id": 9,
+                "total": 134.0,
+                "date": "8/1/2023"
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "first_name": "Eddie",
+        "last_name": "Vedder",
+        "transactions": [
+            {
+                "id": 10,
+                "total": 75.0,
+                "date": "6/10/2023"
+            },
+            {
+                "id": 11,
+                "total": 48.0,
+                "date": "7/12/2023"
+            },
+            {
+                "id": 12,
+                "total": 210.0,
+                "date": "8/3/2023"
+            },
+            {
+                "id": 13,
+                "total": 96.0,
+                "date": "8/4/2023"
+            }
+        ]
+    }
+]
