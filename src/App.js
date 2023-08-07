@@ -13,9 +13,17 @@ const App = () => {
     const twoMonthsAgo = currentMonth - 2
 
     useEffect(() => {
-        axios.get("/db/customers.json").then((res) => {
-            setCustomers(res.data)
-        })
+        const getData = async () => {
+            try {
+                await axios.get("/db/customers.json").then((res) => {
+                    setCustomers(res.data)
+                })
+            } catch (err) {
+                console.error(err)
+            }
+        }
+
+        getData()
     }, [])
 
     const calculateTotalRewardPoints = (transactions) => {
